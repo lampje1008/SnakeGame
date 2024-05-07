@@ -6,6 +6,9 @@
 #define RIGHT 2
 #define LEFT  3
 
+#include <stdexcept>
+#include "map.cpp"
+
 class Snake {
 private:
     static int minLength;
@@ -17,26 +20,32 @@ private:
 
     int tailTrace[2];
 
-public:
-    Snake(int length_, int direction_, int x, int y, int minLength_, int goalLength_) {
-        length = length_;
-        direction = direction_;
+    void initializeLength(int length_) {
+        if (length_ >= SYS_MIN_LENGTH &&
+            length_ <= SYS_MAX_LENGTH)
+            length = length_;
+        else throw out_of_range("INVALID LENGTH");
+    }
 
+    void initializeTailTrace() {
+        tailTrace[0] = tailTrace[1] = -1;
+    }
+
+public:
+    Snake(int length, int direction, int x, int y, int minLength, int goalLength) {
+        initializeLength(length);
+        setDirectionTo(direction);
         for (int i = 0; i < SYS_MAX_LENGTH; ++i)
             if (i < length)
                 switch (direction) {
-                case UP:    position[i][0] = x; position[i][1] = y - i; break;
-                case DOWN:  position[i][0] = x; position[i][1] = y + i; break;
-                case RIGHT: position[i][0] = x - i; position[i][1] = y; break;
-                case LEFT:  position[i][0] = x + i; position[i][1] = y; break;
+                case UP:    setPositionTo(x, y - i, i); break;
+                case DOWN:  setPositionTo(x, y + i, i); break;
+                case RIGHT: setPositionTo(x - i, y, i); break;
+                case LEFT:  setPositionTo(x + i, y, i); break;
                 }
-
-            else position[i][0] = position[i][1] = -1;
-
-        minLength = minLength_;
-        goalLength = goalLength_;
-
-        tailTrace[0] = tailTrace[1] = -1;
+            else setPositionTo(-1, -1, i);
+        setLimits(minLength, goalLength);
+        initializeTailTrace();
     }
 
     void increaseLength() {
@@ -85,18 +94,25 @@ public:
     void setDirectionTo(int direction_) {
         if (0 <= direction_ <= 3)
             direction = direction_;
+        else throw out_of_range("INVALID DIRECTION");
     }
 
     void setPositionTo(int x, int y, int index = 0) {
-        position[index][0] = x;
-        position[index][1] = y;
+        if (0 <= x && x < MAP_SIZE &&
+            0 <= y && y < MAP_SIZE) {
+            position[index][0] = x;
+            position[index][1] = y;
+        }
+        else throw out_of_range("INVALID POSITION");
     }
 
     void setLimits(int minLength_, int goalLength_) {
-        if (length >= SYS_MIN_LENGTH)
+        if (minLength_ >= SYS_MIN_LENGTH &&
+            minLength_ <= goalLength_ &&
+            goalLength_ <= SYS_MAX_LENGTH) {
             minLength = minLength_;
-
-        if (length <= SYS_MAX_LENGTH)
             goalLength = goalLength_;
+        }
+        else throw out_of_range("INVALID LENGTH");
     }
 };
