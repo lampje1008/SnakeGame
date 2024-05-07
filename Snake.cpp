@@ -11,8 +11,8 @@
 
 class Snake {
 private:
-    static int minLength;
-    static int goalLength;
+    int minLength;
+    int goalLength;
 
     int length;
     int direction;
@@ -20,7 +20,7 @@ private:
 
     int tailTrace[2];
 
-    void initializeLength(int length_) {
+    void initializeLengthTo(int length_) {
         if (length_ >= SYS_MIN_LENGTH &&
             length_ <= SYS_MAX_LENGTH)
             length = length_;
@@ -33,7 +33,7 @@ private:
 
 public:
     Snake(int length, int direction, int x, int y, int minLength, int goalLength) {
-        initializeLength(length);
+        initializeLengthTo(length);
         setDirectionTo(direction);
         for (int i = 0; i < SYS_MAX_LENGTH; ++i)
             if (i < length)
@@ -44,7 +44,7 @@ public:
                 case LEFT:  setPositionTo(x + i, y, i); break;
                 }
             else setPositionTo(-1, -1, i);
-        setLimits(minLength, goalLength);
+        setLimitsTo(minLength, goalLength);
         initializeTailTrace();
     }
 
@@ -106,7 +106,7 @@ public:
         else throw out_of_range("INVALID POSITION");
     }
 
-    void setLimits(int minLength_, int goalLength_) {
+    void setLimitsTo(int minLength_, int goalLength_) {
         if (minLength_ >= SYS_MIN_LENGTH &&
             minLength_ <= goalLength_ &&
             goalLength_ <= SYS_MAX_LENGTH) {
