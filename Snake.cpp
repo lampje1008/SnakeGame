@@ -7,7 +7,6 @@
 #define LEFT  3
 
 #include <stdexcept>
-#include "map.cpp"
 
 class Snake {
 private:
@@ -24,7 +23,7 @@ private:
         if (length_ >= SYS_MIN_LENGTH &&
             length_ <= SYS_MAX_LENGTH)
             length = length_;
-        else throw out_of_range("INVALID LENGTH");
+        else throw std::out_of_range("INVALID LENGTH");
     }
 
     void initializeTailTrace() {
@@ -35,15 +34,15 @@ public:
     Snake(int length, int direction, int x, int y, int minLength, int goalLength) {
         initializeLengthTo(length);
         setDirectionTo(direction);
-        for (int i = 0; i < SYS_MAX_LENGTH; ++i)
-            if (i < length)
+        for (int index = 0; index < SYS_MAX_LENGTH; ++index)
+            if (index < length)
                 switch (direction) {
-                case UP:    setPositionTo(x, y - i, i); break;
-                case DOWN:  setPositionTo(x, y + i, i); break;
-                case RIGHT: setPositionTo(x - i, y, i); break;
-                case LEFT:  setPositionTo(x + i, y, i); break;
+                case UP:    setPositionTo(x, y - index, index); break;
+                case DOWN:  setPositionTo(x, y + index, index); break;
+                case RIGHT: setPositionTo(x - index, y, index); break;
+                case LEFT:  setPositionTo(x + index, y, index); break;
                 }
-            else setPositionTo(-1, -1, i);
+            else setPositionTo(-1, -1, index);
         setLimitsTo(minLength, goalLength);
         initializeTailTrace();
     }
@@ -66,9 +65,9 @@ public:
         tailTrace[0] = position[length - 1][0];
         tailTrace[1] = position[length - 1][1];
 
-        for (int i = length - 1; i > 0; --i) {
-            position[i][0] = position[i - 1][0];
-            position[i][1] = position[i - 1][1];
+        for (int index = length - 1; index > 0; --index) {
+            position[index][0] = position[index - 1][0];
+            position[index][1] = position[index - 1][1];
         }
 
         switch (direction) {
@@ -94,16 +93,20 @@ public:
     void setDirectionTo(int direction_) {
         if (0 <= direction_ <= 3)
             direction = direction_;
-        else throw out_of_range("INVALID DIRECTION");
+        else throw std::out_of_range("INVALID DIRECTION");
+    }
+
+    int getMinLength() {
+        return minLength;
+    }
+
+    int getGoalLength() {
+        return goalLength;
     }
 
     void setPositionTo(int x, int y, int index = 0) {
-        if (0 <= x && x < MAP_SIZE &&
-            0 <= y && y < MAP_SIZE) {
-            position[index][0] = x;
-            position[index][1] = y;
-        }
-        else throw out_of_range("INVALID POSITION");
+        position[index][0] = x;
+        position[index][1] = y;
     }
 
     void setLimitsTo(int minLength_, int goalLength_) {
@@ -113,6 +116,6 @@ public:
             minLength = minLength_;
             goalLength = goalLength_;
         }
-        else throw out_of_range("INVALID LENGTH");
+        else throw std::out_of_range("INVALID LENGTH");
     }
 };
