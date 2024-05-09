@@ -1,3 +1,6 @@
+#define START_X 8
+#define START_Y 8
+
 #include <curses.h>
 #include <iostream>
 using namespace std;
