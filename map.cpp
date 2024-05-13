@@ -135,6 +135,7 @@ public:
 
 };
 
+/*
 int main() {
 
 	initscr();
@@ -160,3 +161,4 @@ int main() {
 
 	return 0;
 }
+*/
