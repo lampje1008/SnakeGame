@@ -1,6 +1,6 @@
 #include <curses.h>
 #include "map.cpp"
-#include "Snake2.cpp"
+#include "Snake.cpp"
 #include "Item.cpp"
 
 void printBlockAt(int x, int y, int colorPair) {
