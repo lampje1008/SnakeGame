@@ -35,7 +35,7 @@ int main() {
 				break;
 
 			printBlockAt(START_X + snake.getPositionOf(index)[0],
-				START_Y + snake.getPositionOf(index)[1],
+				START_Y + snake.getPositionOf(index)[1] * 2,
 				5);
 		}
 		refresh();
@@ -45,7 +45,7 @@ int main() {
 		switch (keyboardInput) {
 		case KEY_UP:    snake.setDirectionTo(LEFT);  break;
 		case KEY_DOWN:  snake.setDirectionTo(RIGHT); break;
-		case KEY_RIGHT: snake.setDirectionTo(UP);	 break;
+		case KEY_RIGHT: snake.setDirectionTo(UP);    break;
 		case KEY_LEFT:  snake.setDirectionTo(DOWN);  break;
 		}
 		snake.move();
