@@ -1,63 +1,16 @@
-#define START_X 8
-#define START_Y 8
-
 #include <curses.h>
 #include <iostream>
+#include "Constants.h"
+
 using namespace std;
 
-#define MAP_SIZE 20
-
-class MAP {
+class Map {
 public:
 	int map[MAP_SIZE][MAP_SIZE];
 
-	MAP() {
-		init_map();
-	}
+	Map() {}
 
-	void init_map() {
-		for (int i = 0; i < MAP_SIZE; i++) {
-			for (int j = 0; j < MAP_SIZE; j++) {
-				if (i == 0 || i == MAP_SIZE - 1) map[i][j] = 1; //위-아래 벽일때 1
-				else if (j == 0 || j == MAP_SIZE - 1) map[i][j] = 1; //양 옆 벽일때 1
-				else map[i][j] = 0;
-			}
-		}
-		//immune wall
-		map[0][0] = 2;
-		map[0][MAP_SIZE - 1] = 2;
-		map[MAP_SIZE - 1][0] = 2;
-		map[MAP_SIZE - 1][MAP_SIZE - 1] = 2;
-	}
-
-
-	void draw_map(int start_x = 8, int start_y = 8) {
-
-		for (int i = 0; i < MAP_SIZE; i++) {
-			for (int j = 0; j < MAP_SIZE; j++) {
-				move(start_x + i, start_x + j * 2);
-				if (map[i][j] == 1) {
-					attron(COLOR_PAIR(1));
-					addch(ACS_BLOCK);
-					addch(ACS_BLOCK);
-					attron(COLOR_PAIR(1));
-				}
-				else if (map[i][j] == 2) {
-					attron(COLOR_PAIR(1)); //immune Wall이지만 일반 Wall과 같은 색상으로 임시 설정
-					addch(ACS_BLOCK);
-					addch(ACS_BLOCK);
-					attron(COLOR_PAIR(1));
-				}
-				else {
-					attron(COLOR_PAIR(2));
-					addch(ACS_BLOCK);
-					addch(ACS_BLOCK);
-					attron(COLOR_PAIR(2));
-				}
-			}
-		}
-	}
-
+	// 추후 수정 필요: 개발 환경에 따라서 깨지는 경우 발생
 	void draw_title() {
 
 		int space = 20, space2 = 5;
@@ -135,6 +88,7 @@ public:
 
 };
 
+// Test Function
 /*
 int main() {
 
