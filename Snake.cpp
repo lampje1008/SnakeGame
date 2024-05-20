@@ -1,10 +1,6 @@
-#define MIN_LENGTH 3
-#define MAX_LENGTH 30
+#include "Constants.h"
 
-#define UP    0
-#define DOWN  1
-#define RIGHT 2
-#define LEFT  3
+#include <curses.h>
 
 class Snake {
 private:
@@ -20,22 +16,22 @@ private:
             this->length = length;
     }
 
-    void setPositionOf(const int index, const int x, const int y) {
-        position[index][0] = x;
-        position[index][1] = y;
+    void setPositionOf(const int index, const int row, const int column) {
+        position[index][0] = row;
+        position[index][1] = column;
     }
 
 public:
-    Snake(const int length, const int direction, const int x, const int y) {
+    Snake(const int length, const int direction, const int row, const int column) {
         setLengthTo(length);
         setDirectionTo(direction);
         for (int index = 0; index < MAX_LENGTH; ++index)
             if (index < length)
                 switch (direction) {
-                case UP:    setPositionOf(index, x, y - index); break;
-                case DOWN:  setPositionOf(index, x, y + index); break;
-                case RIGHT: setPositionOf(index, x - index, y); break;
-                case LEFT:  setPositionOf(index, x + index, y); break;
+                case UP:    setPositionOf(index, row + index, column); break;
+                case DOWN:  setPositionOf(index, row - index, column); break;
+                case RIGHT: setPositionOf(index, row, column - index); break;
+                case LEFT:  setPositionOf(index, row, column + index); break;
                 }
             else setPositionOf(index, -1, -1);
         tailTrace[0] = tailTrace[1] = -1;
@@ -61,18 +57,18 @@ public:
             position[index][1] = position[index - 1][1];
         }
         switch (direction) {
-        case UP:    ++position[0][1]; break;
-        case DOWN:  --position[0][1]; break;
-        case RIGHT: ++position[0][0]; break;
-        case LEFT:  --position[0][0]; break;
+        case UP:    --position[0][0]; break;
+        case DOWN:  ++position[0][0]; break;
+        case RIGHT: ++position[0][1]; break;
+        case LEFT:  --position[0][1]; break;
         }
     }
 
-    int const getLength() {
+    int const getLength() const {
         return length;
     }
 
-    int const getDirection() {
+    int const getDirection() const {
         return direction;
     }
 
@@ -86,7 +82,7 @@ public:
             this->direction = direction;
     }
 
-    void setPositionTo(const int x, const int y) {
-        setPositionOf(0, x, y);
+    void setPositionTo(const int row, const int column) {
+        setPositionOf(0, row, column);
     }
 };
