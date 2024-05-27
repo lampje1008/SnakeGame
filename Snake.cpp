@@ -39,8 +39,8 @@ public:
 
     void increaseLength() {
         ++length;
-        position[length][0] = tailTrace[0];
-        position[length][1] = tailTrace[1];
+        position[length - 1][0] = tailTrace[0];
+        position[length - 1][1] = tailTrace[1];
     }
 
     void decreaseLength() {
