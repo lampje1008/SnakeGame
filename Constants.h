@@ -7,7 +7,7 @@
 #define MAP_SIZE 20
 
 // Snake Configurations
-#define MIN_LENGTH 1
+#define MIN_LENGTH 3
 #define MAX_LENGTH 30
 
 // Tick Configurations
