@@ -8,8 +8,7 @@
 #include <string>
 #include <curses.h>
 #include <fstream>
-#include <thread>
-#include <ctime>
+#include <chrono>
 
 using namespace std;
 
@@ -51,14 +50,24 @@ int main() {
 	initscr();
 
 	start_color();
-	init_pair(1, COLOR_RED, COLOR_RED);
-	init_pair(2, COLOR_BLUE, COLOR_BLUE);
-	init_pair(3, COLOR_WHITE, COLOR_WHITE);
-	init_pair(4, COLOR_YELLOW, COLOR_YELLOW);
-	init_pair(5, COLOR_GREEN, COLOR_GREEN);
-	init_pair(6, COLOR_BLACK, COLOR_BLACK);
-	init_pair(7, COLOR_CYAN, COLOR_CYAN);
-	init_pair(8, COLOR_MAGENTA, COLOR_MAGENTA);
+
+	init_color(98, 1000, 0, 0);			// red
+	init_color(99, 500, 500, 500);		// gray
+	init_color(100, 1000, 500, 0);		// orange
+	init_color(101, 1000, 1000, 0);		// yellow
+	init_color(102, 500, 0, 1000);		// purple
+	init_color(103, 0, 1000, 0);		// green
+	init_color(104, 1000, 1000, 1000);	// white
+	init_color(105, 0, 0, 0);			// black
+
+	init_pair(1, 104, 104);
+	init_pair(2, 99, 99);
+	init_pair(3, 105, 105);
+	init_pair(4, 101, 101);
+	init_pair(5, 100, 100);
+	init_pair(6, 103, 103);
+	init_pair(7, 98, 98);
+	init_pair(8, 102, 102);
 	// 필요하면 컬러페어 수정하거나 추가해주세요!
 
 	keypad(stdscr, true);
@@ -76,12 +85,11 @@ int main() {
 
 	// 게임 난이도 변수
 	// 추후 플레이어가 메인화면에서 바꿀 수 있도록 할 예정
-	goal = 15;
+	goal = 6;
 	snakeTick = 1;
 	itemTick = 40;
-	itemNum = 3;
-	
-	halfdelay(3);
+	itemNum = 2;
+	halfdelay(5);
 	// 스테이지 클리어하면 stage 변수가 1씩 증가
 	// victory가 true인 상태로 반복문 탈출하면 게임 최종 승리, 아니면 실패
 	for (int stage = 1; ; ++stage) {
@@ -157,8 +165,10 @@ int main() {
 				for (int column = 0; column < MAP_SIZE; ++column)
 					printb(START_X + row, START_Y + column, screen[row][column] + 1);
 			refresh();
-			
+			flushinp();
+			std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 			keyboardInput = getch();
+			while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start).count() < 500);
 			++tick;
 
 			// 지렁이가 움직일 때
@@ -271,9 +281,6 @@ int main() {
 		// 실패 처리하고 게임 종료
 		if (!victory)
 			break;
-
-		// 다음 스테이지로 넘어가기까지 잠깐 멈춤
-		Sleep(5000);
 	}
 
 	endwin();
@@ -284,3 +291,38 @@ int main() {
 
 	return 0;
 }
+
+
+/*
+
+#include "constants.h"
+
+#include <iostream>
+#include <curses.h>
+
+using namespace std;
+
+int main()
+{
+	initscr();
+
+	int height = getmaxy(stdscr);
+	int width =  getmaxx(stdscr);
+	int aligned = (height - MAP_SIZE) / 2;
+	int z = (width - MAP_SIZE * 2) / 2;
+	WINDOW * window =
+		newwin(MAP_SIZE, MAP_SIZE * 2, aligned, z);
+
+	box(window, '*', '*');
+	refresh();
+	wrefresh(window);
+	getch();
+	endwin();
+
+	
+
+	return 0;
+}
+
+
+*/
