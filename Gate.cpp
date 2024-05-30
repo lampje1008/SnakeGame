@@ -19,15 +19,15 @@ public:
 
 	int checkWall() const {
 		if (x == 0)
-			return 1; // 반대가 왼쪽 벽
+			return 0; // 반대가 위쪽 벽
 		else if (x == MAP_SIZE - 1)
-			return 2; // 오른쪽 벽
+			return 1; // 아래 벽
 		else if (y == 0)
-			return 3; // 위쪽 벽
+			return 3; // 왼족 벽
 		else if (y == MAP_SIZE - 1)
-			return 4; // 아래쪽 벽
+			return 2; // 오른쪽 벽
 		else
-			return 0;
+			return -1;
 	}
 
 
