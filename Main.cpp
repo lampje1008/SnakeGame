@@ -55,23 +55,20 @@ int main() {
 	init_color(99, 500, 500, 500);		// gray
 	init_color(100, 1000, 500, 0);		// orange
 	init_color(101, 1000, 1000, 0);		// yellow
-	init_color(102, 500, 0, 1000);		// purple
+	init_color(102, 800, 0, 800);		// purple
 	init_color(103, 0, 1000, 0);		// green
 	init_color(104, 1000, 1000, 1000);	// white
 	init_color(105, 0, 0, 0);			// black
 
-	init_pair(1, 104, 104);
-	init_pair(2, 99, 99);
-	init_pair(3, 105, 105);
+	init_pair(1, 105, 105);
+	init_pair(2, 104, 104);
+	init_pair(3, 99, 99);
 	init_pair(4, 101, 101);
 	init_pair(5, 100, 100);
 	init_pair(6, 103, 103);
 	init_pair(7, 98, 98);
 	init_pair(8, 102, 102);
 	// 필요하면 컬러페어 수정하거나 추가해주세요!
-
-	keypad(stdscr, true);
-	noecho();
 
 	int itemNum;
 	int itemTick;
@@ -82,13 +79,66 @@ int main() {
 	bool victory;
 	int tick;
 	int keyboardInput;
-
+	
 	// 게임 난이도 변수
 	// 추후 플레이어가 메인화면에서 바꿀 수 있도록 할 예정
 	goal = 6;
 	snakeTick = 1;
 	itemTick = 40;
 	itemNum = 2;
+
+	
+
+	int stdscr_height = getmaxy(stdscr);
+	int stdscr_width = getmaxx(stdscr);
+	int title_height = 10;
+	int title_width = 20;
+	int menu_height = 10;
+	int menu_width = 20;
+	int gap = 1;
+	int title_x = (stdscr_width - title_width) / 2;
+	int title_y = (stdscr_height - (title_height + menu_height + gap)) / 2;
+	int menu_x = (stdscr_width - menu_width) / 2;
+	int menu_y = title_y + title_height + gap;
+
+	WINDOW* title = newwin(title_height, title_width, title_y, title_x);
+	WINDOW* menu = newwin(menu_height, menu_width, menu_y, menu_x);
+
+	box(title, '*', '*');
+	box(menu, '*', '*');
+
+	refresh();
+	wrefresh(title);
+	wrefresh(menu);
+	getch();
+
+	/*
+	char ch;
+	while (true)
+	{
+		WINDOW* title = newwin(title_height, title_width, title_y, title_x);
+		WINDOW* menu = newwin(menu_height, menu_width, menu_y, menu_x);
+		MEVENT event;
+		ch = getch();
+		if (ch == KEY_MOUSE)
+	}
+	*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	keypad(stdscr, true);
+	noecho();
 	halfdelay(5);
 	// 스테이지 클리어하면 stage 변수가 1씩 증가
 	// victory가 true인 상태로 반복문 탈출하면 게임 최종 승리, 아니면 실패
@@ -165,6 +215,17 @@ int main() {
 				for (int column = 0; column < MAP_SIZE; ++column)
 					printb(START_X + row, START_Y + column, screen[row][column] + 1);
 			refresh();
+
+			// 목표 길이 도달하면 스테이지 클리어
+			if (snake.getLength() >= goal) {
+				victory = true;
+				break;
+			}
+
+			// 최소 길이보다 짧아지면 실패
+			if (snake.getLength() < MIN_LENGTH)
+				break;
+
 			flushinp();
 			std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 			keyboardInput = getch();
@@ -225,16 +286,6 @@ int main() {
 						break;
 					}
 				}
-
-				// 목표 길이 도달하면 스테이지 클리어
-				if (snake.getLength() >= goal) {
-					victory = true;
-					break;
-				}
-
-				// 최소 길이보다 짧아지면 실패
-				if (snake.getLength() < MIN_LENGTH)
-					break;
 
 				for (int i = 0; i < 2; ++i) {
 					if (snake.getPositionOf(0)[0] == gates[i].x && snake.getPositionOf(0)[1] == gates[i].y) {
