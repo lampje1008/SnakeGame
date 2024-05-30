@@ -137,9 +137,9 @@ int main() {
 
 
 
-	keypad(stdscr, true);
+	keypad(stdscr, TRUE);
 	noecho();
-	halfdelay(5);
+	nodelay(stdscr, TRUE);
 	// 스테이지 클리어하면 stage 변수가 1씩 증가
 	// victory가 true인 상태로 반복문 탈출하면 게임 최종 승리, 아니면 실패
 	for (int stage = 1; ; ++stage) {
@@ -185,37 +185,6 @@ int main() {
 
 		// victory가 true인 상태로 반복문 탈출하면 스테이지 성공, 아니면 실패
 		while (true) {
-			// screen에 map 올리기
-			for (int row = 0; row < MAP_SIZE; ++row)
-				for (int column = 0; column < MAP_SIZE; ++column)
-					screen[row][column] = map.map[row][column];
-
-			// screen에 item 올리기
-			for (int index = 0; index < itemNum; ++index) {
-				screen[items[index].x][items[index].y]
-					= (items[index].Item_type == 1) ? GROWTH_ITEM : POISON_ITEM;
-			}
-
-			// screen에 gate 올리기
-			// 정은: 아래 코드를 완성해주세요.
-			for (Gate gate : gates) {
-				// gate의 위치에 해당하는 위치를 screen에서 GATE(7)로 설정
-				screen[gate.x][gate.y] = 7;
-
-			}
-
-			// screen에 snake 올리기
-			for (int index = 0; index < snake.getLength(); ++index) {
-				screen[snake.getPositionOf(index)[0]][snake.getPositionOf(index)[1]]
-					= (index == 0) ? SNAKE_HEAD : SNAKE_BODY;
-			}
-
-			// screen을 화면에 출력
-			for (int row = 0; row < MAP_SIZE; ++row)
-				for (int column = 0; column < MAP_SIZE; ++column)
-					printb(START_X + row, START_Y + column, screen[row][column] + 1);
-			refresh();
-
 			// 목표 길이 도달하면 스테이지 클리어
 			if (snake.getLength() >= goal) {
 				victory = true;
@@ -226,10 +195,7 @@ int main() {
 			if (snake.getLength() < MIN_LENGTH)
 				break;
 
-			flushinp();
-			std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 			keyboardInput = getch();
-			while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start).count() < 500);
 			++tick;
 
 			// 지렁이가 움직일 때
@@ -326,6 +292,40 @@ int main() {
 				//아이템 재출현
 				for (int i = 0; i < itemNum; i++)  Item_respawn(items[i], map);
 			}
+
+			// screen에 map 올리기
+			for (int row = 0; row < MAP_SIZE; ++row)
+				for (int column = 0; column < MAP_SIZE; ++column)
+					screen[row][column] = map.map[row][column];
+
+			// screen에 item 올리기
+			for (int index = 0; index < itemNum; ++index) {
+				screen[items[index].x][items[index].y]
+					= (items[index].Item_type == 1) ? GROWTH_ITEM : POISON_ITEM;
+			}
+
+			// screen에 gate 올리기
+			// 정은: 아래 코드를 완성해주세요.
+			for (Gate gate : gates) {
+				// gate의 위치에 해당하는 위치를 screen에서 GATE(7)로 설정
+				screen[gate.x][gate.y] = 7;
+
+			}
+
+			// screen에 snake 올리기
+			for (int index = 0; index < snake.getLength(); ++index) {
+				screen[snake.getPositionOf(index)[0]][snake.getPositionOf(index)[1]]
+					= (index == 0) ? SNAKE_HEAD : SNAKE_BODY;
+			}
+
+			// screen을 화면에 출력
+			for (int row = 0; row < MAP_SIZE; ++row)
+				for (int column = 0; column < MAP_SIZE; ++column)
+					printb(START_X + row, START_Y + column, screen[row][column] + 1);
+			refresh();
+
+
+			Sleep(TICK);
 		}
 
 		// victory가 false인 상태로 반복문 탈출했으면
