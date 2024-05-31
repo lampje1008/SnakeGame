@@ -48,6 +48,7 @@ void Item_respawn(Item& item, const Map map) {
 	do {
 		new_x = std::rand() % MAP_SIZE;
 		new_y = std::rand() % MAP_SIZE;
+
 	} while (map.map[new_x][new_y] != 0);
 
 	item.x = new_x;
@@ -61,8 +62,35 @@ bool can_move(int m) {
 	else return false;
 }
 
+void setConsoleSize(int width, int height) {
+
+	string command = "mode con: cols=" + std::to_string(width) + " lines=" + std::to_string(height);
+	system(command.c_str());
+}
+
 int main() {
 	initscr();
+
+	/*
+	mvaddch(0, 1, ACS_BLOCK);
+	mvaddch(0, 2, ACS_BLOCK);
+	mvaddch(0, 3, ACS_BLOCK);
+	mvaddch(0, 4, ACS_BLOCK);
+	mvaddch(1, 0, ACS_BLOCK);
+	mvaddch(1, 1, ACS_BLOCK);
+	mvaddch(2, 1, ACS_BLOCK);
+	mvaddch(2, 2, ACS_BLOCK);
+	mvaddch(2, 3, ACS_BLOCK);
+	mvaddch(2, 4, ACS_BLOCK);
+	mvaddch(3, 4, ACS_BLOCK);
+	mvaddch(3, 5, ACS_BLOCK);
+	mvaddch(4, 1, ACS_BLOCK);
+	mvaddch(4, 2, ACS_BLOCK);
+	mvaddch(4, 3, ACS_BLOCK);
+	mvaddch(4, 4, ACS_BLOCK);
+	refresh();
+	getch();
+	*/
 
 	start_color();
 
@@ -98,10 +126,10 @@ int main() {
 	
 	// 게임 난이도 변수
 	// 추후 플레이어가 메인화면에서 바꿀 수 있도록 할 예정
-	goal = 6;
-	snakeTick = 2;
-	itemTick = 60;
-	itemNum = 0;
+	goal = 15;
+	snakeTick = 5;
+	itemTick = 80;
+	itemNum = 2;
 
 	
 
@@ -110,7 +138,7 @@ int main() {
 	int stdscr_width = getmaxx(stdscr);
 	int title_height = 10;
 	int title_width = 20;
-	int menu_height = 4;
+	int menu_height = 5;
 	int menu_width = 24;
 	int gap = 2;
 	int title_x = (stdscr_width - title_width) / 2;
@@ -126,6 +154,8 @@ int main() {
 	mvwprintw(title, 0, 5, "TITLE HERE");
 	mvwprintw(menu, 0, 0, "Snake Speed");
 	mvwprintw(menu, 1, 0, "Item Respawn Rate");
+	mvwprintw(menu, 2, 0, "Item Number");
+	
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
@@ -146,14 +176,17 @@ int main() {
 		mvwprintw(menu, 1, menu_width - 2, "%2d", itemTick);
 		wattroff(menu, COLOR_PAIR(9));
 		if (menu_cursor == 2) wattron(menu, COLOR_PAIR(9));
-		mvwprintw(menu, 3, (menu_width - 2) / 2, "OK");
+		mvwprintw(menu, 2, menu_width - 2, "%2d", itemNum);
+		wattroff(menu, COLOR_PAIR(9));
+		if (menu_cursor == 3) wattron(menu, COLOR_PAIR(9));
+		mvwprintw(menu, 4, (menu_width - 2) / 2, "OK");
 		wattroff(menu, COLOR_PAIR(9));
 
 		keyboardInput = getch();
 		switch (keyboardInput)
 		{
 		case KEY_DOWN:
-			if (menu_cursor < 2)
+			if (menu_cursor < 3)
 				++menu_cursor;
 			break;
 
@@ -173,6 +206,10 @@ int main() {
 				++itemTick;
 				break;
 
+			case 2:
+				if (itemNum < 3)
+					++itemNum;
+				break;
 			}
 			break;
 
@@ -187,11 +224,15 @@ int main() {
 				if (itemTick > 1)
 					--itemTick;
 				break;
+			case 2:
+				if (itemNum > 1)
+					--itemNum;
+				break;
 			}
 			break;
 
 		case ' ':
-			if (menu_cursor == 2)
+			if (menu_cursor == 3)
 				end = true;
 			break;
 		}
