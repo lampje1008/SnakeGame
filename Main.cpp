@@ -269,15 +269,23 @@ Gate getRandomGate2(int avoidX, int avoidY) {
 	return Gate(x, y);
 }
 
-void Item_respawn(Item& item) {
+void Item_respawn(Item& item, const Map map, Snake snake) {
 	// 위치가 겹치지 않게 아이템 생성
 	int new_x, new_y;
-	bool snakeCheck = true;
+	bool sc = true;
 	do {
 		new_x = std::rand() % MAP_SIZE;
 		new_y = std::rand() % MAP_SIZE;
 
-	} while (screen[new_x][new_y] != 0 && snakeCheck);
+		for (int i = 0; i < snake.getLength(); i++) {
+			if (snake.getPositionOf(i)[0] == new_x &&
+				snake.getPositionOf(i)[1] == new_y) {
+				sc = false;
+				break;
+			}
+		}
+
+	} while (map.map[new_x][new_y] != 0 && sc);
 
 	item.x = new_x;
 	item.y = new_y;
@@ -371,8 +379,8 @@ int main() {
 	
 	print_title(title);
 
-	mvwprintw(menu, 0, 0, "Snake Speed");
-	mvwprintw(menu, 1, 0, "Item Respawn Rate");
+	mvwprintw(menu, 0, 0, "Snake Tick");
+	mvwprintw(menu, 1, 0, "Item Tick");
 	mvwprintw(menu, 2, 0, "Item Number");
 	
 	cbreak();
@@ -505,7 +513,7 @@ int main() {
 		//items 객체 생성 및 초기화 
 		Item items[3];
 		for (int i = 0; i < itemNum; i++) {
-			Item_respawn(items[i]);
+			Item_respawn(items[i], map, snake);
 		}
 
 		Gate gates[2];
@@ -606,7 +614,7 @@ int main() {
 						}
 
 
-						Item_respawn(items[index]);
+						Item_respawn(items[index], map, snake);
 						//아이템이 먹힌 경우 리스폰 뿐만 아니라, 아이템을 화면에서 잠시 숨겨야 함.
 						items[index].active = false;
 
@@ -664,7 +672,7 @@ int main() {
 
 			if (tick % itemTick == 0) {
 				//아이템 재출현
-				for (int i = 0; i < itemNum; i++)  Item_respawn(items[i]);
+				for (int i = 0; i < itemNum; i++)  Item_respawn(items[i], map, snake);
 			}
 
 			// screen에 map 올리기
@@ -702,6 +710,7 @@ int main() {
 
 			// print score
 			wclear(score);
+			wclear(ms);
 			wbkgd(score, COLOR_PAIR(9));
 			wbkgd(ms, COLOR_PAIR(9));
 			wprintw(score, "   Score\n\n");
