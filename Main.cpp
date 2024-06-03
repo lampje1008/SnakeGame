@@ -272,8 +272,9 @@ Gate getRandomGate2(int avoidX, int avoidY) {
 void Item_respawn(Item& item, const Map map, Snake snake) {
 	// 위치가 겹치지 않게 아이템 생성
 	int new_x, new_y;
-	bool sc = true;
+	bool sc;
 	do {
+		sc = true;
 		new_x = std::rand() % MAP_SIZE;
 		new_y = std::rand() % MAP_SIZE;
 
@@ -284,8 +285,7 @@ void Item_respawn(Item& item, const Map map, Snake snake) {
 				break;
 			}
 		}
-
-	} while (map.map[new_x][new_y] != 0 && sc);
+	} while (map.map[new_x][new_y] != 0 || !sc);
 
 	item.x = new_x;
 	item.y = new_y;
