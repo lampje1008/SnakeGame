@@ -18,7 +18,7 @@
 #define DOWN 1
 #define RIGHT 2
 #define LEFT 3
-#define START_X  8
+#define START_X  15
 #define START_Y  8
 #define BLANK 0
 #define WALL 1
@@ -29,5 +29,10 @@
 #define GROWTH_ITEM 5
 #define POISON_ITEM 6
 #define GATE 7
+#define PSYCH_ITEM 9
+
+
+#define CONSOLE_WIDTH 150
+#define CONSOLE_HEIGHT 50
 
 #endif
