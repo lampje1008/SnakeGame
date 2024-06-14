@@ -10,81 +10,651 @@ public:
 
 	Map() {}
 
-	// 추후 수정 필요: 개발 환경에 따라서 깨지는 경우 발생
-	void draw_title() {
+	void print_title(WINDOW* w)
+{
+	int space = 8;
 
-		int space = 20, space2 = 5;
-		attron(COLOR_PAIR(3));
+	mvwaddch(w, 0, 1, ACS_BLOCK);
+	mvwaddch(w, 0, 2, ACS_BLOCK);
+	mvwaddch(w, 0, 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4, ACS_BLOCK);
+	mvwaddch(w, 0, 5, ACS_BLOCK);
+	mvwaddch(w, 1, 0, ACS_BLOCK);
+	mvwaddch(w, 1, 1, ACS_BLOCK);
+	mvwaddch(w, 2, 1, ACS_BLOCK);
+	mvwaddch(w, 2, 2, ACS_BLOCK);
+	mvwaddch(w, 2, 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4, ACS_BLOCK);
+	mvwaddch(w, 2, 5, ACS_BLOCK);
+	mvwaddch(w, 3, 5, ACS_BLOCK);
+	mvwaddch(w, 3, 6, ACS_BLOCK);
+	mvwaddch(w, 4, 1, ACS_BLOCK);
+	mvwaddch(w, 4, 2, ACS_BLOCK);
+	mvwaddch(w, 4, 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4, ACS_BLOCK);
+	mvwaddch(w, 4, 5, ACS_BLOCK);
 
-		// S
-		mvprintw(1, 0 + space, " ■■■");
-		mvprintw(2, 0 + space, "■    ");
-		mvprintw(3, 0 + space, " ■■ ");
-		mvprintw(4, 0 + space, "     ■");
-		mvprintw(5, 0 + space, "■■■ ");
+	// N
+	mvwaddch(w, 0, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space, ACS_BLOCK);
 
-		// N
-		mvprintw(1, 8 + space, "■    ■");
-		mvprintw(2, 8 + space, "■■  ■");
-		mvprintw(3, 8 + space, "■ ■ ■");
-		mvprintw(4, 8 + space, "■  ■■");
-		mvprintw(5, 8 + space, "■    ■");
+	//A
+	mvwaddch(w, 0, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 2, ACS_BLOCK);
 
-		// A
-		mvprintw(1, 17 + space, "   ■  ");
-		mvprintw(2, 17 + space, " ■ ■ ");
-		mvprintw(3, 17 + space, "■   ■");
-		mvprintw(4, 17 + space, "■   ■");
-		mvprintw(5, 17 + space, "■   ■");
+	//k
+	mvwaddch(w, 0, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 3, ACS_BLOCK);
 
-		// K
-		mvprintw(1, 25 + space, "■   ■");
-		mvprintw(2, 25 + space, "■ ■  ");
-		mvprintw(3, 25 + space, "■■   ");
-		mvprintw(4, 25 + space, "■  ■ ");
-		mvprintw(5, 25 + space, "■   ■");
 
-		// E
-		mvprintw(1, 33 + space, "■■■");
-		mvprintw(2, 33 + space, "■    ");
-		mvprintw(3, 33 + space, "■■■");
-		mvprintw(4, 33 + space, "■    ");
-		mvprintw(5, 33 + space, "■■■");
+	//E
+	mvwaddch(w, 0, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 2 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 2 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 2 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 4, ACS_BLOCK);
 
-		attroff(COLOR_PAIR(3));
 
-		attroff(COLOR_PAIR(4));
+	//G
+	mvwaddch(w, 0, 1 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 2 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 2 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 3 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + space * 5 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 5 + 3, ACS_BLOCK);
 
-		// G
-		mvprintw(1, 40 + space + space2, " ■■■");
-		mvprintw(2, 40 + space + space2, "■    ");
-		mvprintw(3, 40 + space + space2, "■  ■■");
-		mvprintw(4, 40 + space + space2, "■    ■");
-		mvprintw(5, 40 + space + space2, " ■■■");
+	//A
+	mvwaddch(w, 0, 2 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 2 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 3 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 6 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 6 + 3, ACS_BLOCK);
 
-		// A
-		mvprintw(1, 49 + space + space2, "   ■  ");
-		mvprintw(2, 49 + space + space2, " ■ ■ ");
-		mvprintw(3, 49 + space + space2, "■   ■");
-		mvprintw(4, 49 + space + space2, "■   ■");
-		mvprintw(5, 49 + space + space2, "■   ■");
+	//M
+	mvwaddch(w, 0, 0 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 6 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 7 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 7 + 3, ACS_BLOCK);
 
-		// M
-		mvprintw(1, 57 + space + space2, "■    ■");
-		mvprintw(2, 57 + space + space2, "■■■■");
-		mvprintw(3, 57 + space + space2, "■ ■ ■");
-		mvprintw(4, 57 + space + space2, "■    ■");
-		mvprintw(5, 57 + space + space2, "■    ■");
 
-		// E
-		mvprintw(1, 66 + space + space2, "■■■");
-		mvprintw(2, 66 + space + space2, "■    ");
-		mvprintw(3, 66 + space + space2, "■■■");
-		mvprintw(4, 66 + space + space2, "■    ");
-		mvprintw(5, 66 + space + space2, "■■■");
+	//E
+	mvwaddch(w, 0, 0 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 2 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 2 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 2 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 3 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 8 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 8 + 3, ACS_BLOCK);
 
-		attroff(COLOR_PAIR(4));
-	}
+	// final: (4, 73)
+}
+
+void print_victory(WINDOW* w)
+{
+	int space = 8;
+
+	//g
+	mvwaddch(w, 0, 4 + 1, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 2, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 4, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 5, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 5, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 0, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 1, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 0, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 1, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 4, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 5, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 6, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 0, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 1, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 5, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 6, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 1, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 2, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 4, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 5, ACS_BLOCK);
+
+	//a
+	mvwaddch(w, 0, 4 + 2 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 3 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 4 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 1 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 2 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 4 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 5 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 0 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 1 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 5 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 6 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 0 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 1 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 2 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 3 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 4 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 5 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 6 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 0 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 1 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 5 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 6 + space, ACS_BLOCK);
+
+
+	//m
+	mvwaddch(w, 0, 4 + 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 6 + space * 2, ACS_BLOCK);
+
+	//e
+	mvwaddch(w, 0, 4 + 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + 6 + space * 3, ACS_BLOCK);
+
+	// C
+	mvwaddch(w, 6, 1, ACS_BLOCK);
+	mvwaddch(w, 6, 2, ACS_BLOCK);
+	mvwaddch(w, 6, 3, ACS_BLOCK);
+	mvwaddch(w, 6, 4, ACS_BLOCK);
+	mvwaddch(w, 6, 5, ACS_BLOCK);
+	mvwaddch(w, 7, 1, ACS_BLOCK);
+	mvwaddch(w, 7, 0, ACS_BLOCK);
+	mvwaddch(w, 7, 6, ACS_BLOCK);
+	mvwaddch(w, 8, 0, ACS_BLOCK);
+	mvwaddch(w, 8, 1, ACS_BLOCK);
+	mvwaddch(w, 9, 1, ACS_BLOCK);
+	mvwaddch(w, 9, 0, ACS_BLOCK);
+	mvwaddch(w, 9, 6, ACS_BLOCK);
+	mvwaddch(w, 10, 1, ACS_BLOCK);
+	mvwaddch(w, 10, 2, ACS_BLOCK);
+	mvwaddch(w, 10, 3, ACS_BLOCK);
+	mvwaddch(w, 10, 4, ACS_BLOCK);
+	mvwaddch(w, 10, 5, ACS_BLOCK);
+
+	// L
+	mvwaddch(w, 6, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 3 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space, ACS_BLOCK);
+
+	// E
+	mvwaddch(w, 6, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space * 2, ACS_BLOCK);
+
+
+	// A
+	mvwaddch(w, 6, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space * 3, ACS_BLOCK);
+
+	// R
+	mvwaddch(w, 6, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 6, 2 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 6, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 6, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 6, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 7, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 7, 6 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 2 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 9, 3 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 9, 4 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space * 4, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space * 4, ACS_BLOCK);
+
+}
+
+void print_defeat(WINDOW* w)
+{
+	int space = 8;
+
+	//g
+	mvwaddch(w, 0, 1, ACS_BLOCK);
+	mvwaddch(w, 0, 2, ACS_BLOCK);
+	mvwaddch(w, 0, 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4, ACS_BLOCK);
+	mvwaddch(w, 0, 5, ACS_BLOCK);
+	mvwaddch(w, 0, 5, ACS_BLOCK);
+	mvwaddch(w, 1, 0, ACS_BLOCK);
+	mvwaddch(w, 1, 1, ACS_BLOCK);
+	mvwaddch(w, 2, 0, ACS_BLOCK);
+	mvwaddch(w, 2, 1, ACS_BLOCK);
+	mvwaddch(w, 2, 4, ACS_BLOCK);
+	mvwaddch(w, 2, 5, ACS_BLOCK);
+	mvwaddch(w, 2, 6, ACS_BLOCK);
+	mvwaddch(w, 3, 0, ACS_BLOCK);
+	mvwaddch(w, 3, 1, ACS_BLOCK);
+	mvwaddch(w, 3, 5, ACS_BLOCK);
+	mvwaddch(w, 3, 6, ACS_BLOCK);
+	mvwaddch(w, 4, 1, ACS_BLOCK);
+	mvwaddch(w, 4, 2, ACS_BLOCK);
+	mvwaddch(w, 4, 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4, ACS_BLOCK);
+	mvwaddch(w, 4, 5, ACS_BLOCK);
+
+	//a
+	mvwaddch(w, 0, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 3 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space, ACS_BLOCK);
+
+
+	//m
+	mvwaddch(w, 0, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 1, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 2, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 3, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 2, ACS_BLOCK);
+
+	//e
+	mvwaddch(w, 0, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 0, 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 1, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 2, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 3, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 4, 6 + space * 3, ACS_BLOCK);
+
+	// O
+	mvwaddch(w, 6, 1, ACS_BLOCK);
+	mvwaddch(w, 6, 2, ACS_BLOCK);
+	mvwaddch(w, 6, 3, ACS_BLOCK);
+	mvwaddch(w, 6, 4, ACS_BLOCK);
+	mvwaddch(w, 6, 5, ACS_BLOCK);
+	mvwaddch(w, 7, 0, ACS_BLOCK);
+	mvwaddch(w, 7, 1, ACS_BLOCK);
+	mvwaddch(w, 7, 5, ACS_BLOCK);
+	mvwaddch(w, 7, 6, ACS_BLOCK);
+	mvwaddch(w, 8, 0, ACS_BLOCK);
+	mvwaddch(w, 8, 1, ACS_BLOCK);
+	mvwaddch(w, 8, 5, ACS_BLOCK);
+	mvwaddch(w, 8, 6, ACS_BLOCK);
+	mvwaddch(w, 9, 0, ACS_BLOCK);
+	mvwaddch(w, 9, 1, ACS_BLOCK);
+	mvwaddch(w, 9, 5, ACS_BLOCK);
+	mvwaddch(w, 9, 6, ACS_BLOCK);
+	mvwaddch(w, 10, 1, ACS_BLOCK);
+	mvwaddch(w, 10, 2, ACS_BLOCK);
+	mvwaddch(w, 10, 3, ACS_BLOCK);
+	mvwaddch(w, 10, 4, ACS_BLOCK);
+	mvwaddch(w, 10, 5, ACS_BLOCK);
+
+	// V
+	mvwaddch(w, 6, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 6, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 6, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 7, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 8, 6 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 2 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 4 + space, ACS_BLOCK);
+	mvwaddch(w, 9, 5 + space, ACS_BLOCK);
+	mvwaddch(w, 10, 3 + space, ACS_BLOCK);
+
+	// E
+	mvwaddch(w, 6, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 6, 6 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 2 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 3 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 4 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space * 2, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space * 2, ACS_BLOCK);
+
+	// R
+	mvwaddch(w, 6, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 6, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 7, 6 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 2 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 8, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 3 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 9, 4 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 0 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 1 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 5 + space * 3, ACS_BLOCK);
+	mvwaddch(w, 10, 6 + space * 3, ACS_BLOCK);
+
+	// final: (10, 30)
+}
 
 };
 
