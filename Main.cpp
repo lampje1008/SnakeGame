@@ -468,9 +468,8 @@ int main() {
 				if (drug_dur == 0) {
 					switch (items[index].Item_type)
 					{
-					case 0: screen[items[index].x][items[index].y] = GROWTH_ITEM; break;
+					case 0: case 2:screen[items[index].x][items[index].y] = GROWTH_ITEM; break;
 					case 1: screen[items[index].x][items[index].y] = POISON_ITEM; break;
-					case 2: screen[items[index].x][items[index].y] = PSYCH_ITEM; break;
 					}
 				}
 				else {
